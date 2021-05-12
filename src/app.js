@@ -2,25 +2,33 @@
 import "bootstrap";
 import "./style.css";
 
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
+// Preguntarle a Diego acerca de:
+// 1. Como validar el formulario con el boton Submit y que aparezca la alerta si hay algun campo vacio
+// 2. Definir cual es la mejor forma de validar el menu "State"
+// 3. Definir si es necesario validar el apartado del mensaje (ya que podría ser opcional)
+// 4. Definir si es posible introducir decimales en el apartado de amount
+// 5. Si se pulsa el boton de cancelar se resetea el formulario pero se quedan coloreadas cada una de las celdas
 
-/*NAME*/
-const NAME = document.querySelector("#NAME");
-const LastName = document.querySelector("#LastName");
-const inpuCity = document.querySelector("#inpuCity");
-const floatingTextarea = document.querySelector("#floatingTextarea");
+const card = document.querySelector("#card");
+const CVC = document.querySelector("#cvc");
+const amount = document.querySelector("#amount");
+const firstName = document.querySelector("#name");
+const lastName = document.querySelector("#lastName");
+const city = document.querySelector("#city");
+const state = document.querySelector("#state");
+const postalCode = document.querySelector("#postalCode");
+const message = document.querySelector("#message");
 
 window.onload = () => {
-  isValidName();
-  isValid1();
-  isValid2();
-  isValid3();
-  isValid4();
-  isValidNum1();
-  isValidNum2();
-  isValidNum3();
-  isValidNum4();
+  isValidCard();
+  isValidCVC();
+  isValidAmount();
+  isValidFirstName();
+  isValidLastName();
+  isValidCity();
+  isValidState();
+  isValidPostalCode();
+  isValidMessage();
 };
 
 const invalidInputStyle = input => {
@@ -48,58 +56,69 @@ const check4Number = Number => {
   return /^\d{4}$/.test(Number);
 };
 
-/*NAME*/
-
-const isValidName = () => {
-  NAME.addEventListener("focusout", event => {
-    checkOnlyString(NAME.value)
-      ? validInputStyle(NAME)
-      : invalidInputStyle(NAME);
+/*Card*/
+const isValidCard = () => {
+  card.addEventListener("focusout", event => {
+    check16Number(card.value) ? validInputStyle(card) : invalidInputStyle(card);
   });
 };
 
-/*LastName*/
-
-const isValid1 = () => {
-  LastName.addEventListener("focusout", event => {
-    checkOnlyString(LastName.value)
-      ? validInputStyle(LastName)
-      : invalidInputStyle(LastName);
+/*CVC*/
+const isValidCVC = () => {
+  CVC.addEventListener("focusout", event => {
+    check4Number(CVC.value) ? validInputStyle(CVC) : invalidInputStyle(CVC);
   });
 };
-/*LastName*/
 
-/*CITY*/
-const isValid2 = () => {
-  inputCity.addEventListener("focusout", event => {
-    checkOnlyString(inputCity.value)
-      ? validInputStyle(inputCity)
-      : invalidInputStyle(inputCity);
+/*Amount*/
+const isValidAmount = () => {
+  amount.addEventListener("focusout", event => {
+    checkOnlyNumber(amount.value)
+      ? validInputStyle(amount)
+      : invalidInputStyle(amount);
   });
 };
-/*CITY*/
 
-/*STATE*/
-const isValid4 = () => {
+/*First Name*/
+
+const isValidFirstName = () => {
+  firstName.addEventListener("focusout", event => {
+    checkOnlyString(firstName.value)
+      ? validInputStyle(firstName)
+      : invalidInputStyle(firstName);
+  });
+};
+
+/*Last Name*/
+
+const isValidLastName = () => {
+  lastName.addEventListener("focusout", event => {
+    checkOnlyString(lastName.value)
+      ? validInputStyle(lastName)
+      : invalidInputStyle(lastName);
+  });
+};
+
+/*City*/
+const isValidCity = () => {
+  city.addEventListener("focusout", event => {
+    checkOnlyString(city.value)
+      ? validInputStyle(city)
+      : invalidInputStyle(city);
+  });
+};
+
+/*State*/
+const isValidState = () => {
   exampleList.addEventListener("focusout", event => {
     checkOnlyString(exampleList.value)
       ? validInputStyle(exampleList)
       : invalidInputStyle(exampleList);
   });
 };
-/*STATE*/
 
-/*MENSAJE*/
-const isValid3 = () => {
-  floatingTextarea.addEventListener("focusout", event => {
-    checkOnlyString(floatingTextarea.value)
-      ? validInputStyle(floatingTextarea)
-      : invalidInputStyle(floatingTextarea);
-  });
-};
-
-/*PostalCode*/
-const isValidNum1 = () => {
+/*Postal Code*/
+const isValidPostalCode = () => {
   postalCode.addEventListener("focusout", event => {
     checkOnlyNumber(postalCode.value)
       ? validInputStyle(postalCode)
@@ -107,66 +126,11 @@ const isValidNum1 = () => {
   });
 };
 
-/*CARD*/
-const isValidNum2 = () => {
-  inputcard.addEventListener("focusout", event => {
-    check16Number(inputcard.value)
-      ? validInputStyle(inputcard)
-      : invalidInputStyle(inputcard);
+/*Message*/
+const isValidMessage = () => {
+  message.addEventListener("focusout", event => {
+    checkOnlyString(message.value)
+      ? validInputStyle(message)
+      : invalidInputStyle(message);
   });
 };
-
-/*CVC*/
-const isValidNum3 = () => {
-  inputcvc.addEventListener("focusout", event => {
-    check4Number(inputcvc.value)
-      ? validInputStyle(inputcvc)
-      : invalidInputStyle(inputcvc);
-  });
-};
-
-/*AMOUNT*/
-const isValidNum4 = () => {
-  inputamount.addEventListener("focusout", event => {
-    checkOnlyNumber(inputamount.value)
-      ? validInputStyle(inputamount)
-      : invalidInputStyle(inputamount);
-  });
-};
-
-/*window.onload = () => {
-  
-  const card = this.document.querySelector("#inputcard");
-  card.addEventListener("input", event => { //
-   
-
-    heckCard(event)
-
-  });
-
-function checkCard() {
-  if (event.card == null || card.length == 0 || /^\s+$/.test(card)) {
-    console.log("event.inputcard");
-    return alert("Estoy escribiendo");
-  }
-  return false;
-}*/
-
-//if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
-// return false;}
-
-/*window.onload = () => {
-  const NAME = document.querySelector("#inputfirstname");
-  NAME.addEventListener("input", event => {
-    // detectar cambio de valor en un evento
-
-    let empty = checkName(event);
-  });
-};
-
-function checkName(event) {
-  if (event.target.value) {
-    return false;
-  }
-  return true;
-}*/

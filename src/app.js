@@ -2,13 +2,6 @@
 import "bootstrap";
 import "./style.css";
 
-// Preguntarle a Diego acerca de:
-// 1. Como validar el formulario con el boton Submit y que aparezca la alerta si hay algun campo vacio
-// 2. Definir cual es la mejor forma de validar el menu "State"
-// 3. Definir si es necesario validar el apartado del mensaje (ya que podría ser opcional)
-// 4. Definir si es posible introducir decimales en el apartado de amount
-// 5. Si se pulsa el boton de cancelar se resetea el formulario pero se quedan coloreadas cada una de las celdas
-
 const card = document.querySelector("#card");
 const CVC = document.querySelector("#cvc");
 const amount = document.querySelector("#amount");
@@ -18,6 +11,9 @@ const city = document.querySelector("#city");
 const state = document.querySelector("#state");
 const postalCode = document.querySelector("#postalCode");
 const message = document.querySelector("#message");
+const send = document.querySelector("#send");
+const alert = document.querySelector("#alert");
+const cancel = document.querySelector("#cancel");
 
 window.onload = () => {
   isValidCard();
@@ -29,8 +25,41 @@ window.onload = () => {
   isValidState();
   isValidPostalCode();
   isValidMessage();
+  cancelButton();
+  sendButton();
+};
+const cancelButton = () => {
+  cancel.addEventListener("click", event => {
+    alert.classList.add("fade");
+    card.classList.remove("is-valid", "is-invalid");
+    CVC.classList.remove("is-valid", "is-invalid");
+    amount.classList.remove("is-valid", "is-invalid");
+    firstName.classList.remove("is-valid", "is-invalid");
+    lastName.classList.remove("is-valid", "is-invalid");
+    city.classList.remove("is-valid", "is-invalid");
+    state.classList.remove("is-valid", "is-invalid");
+    postalCode.classList.remove("is-valid", "is-invalid");
+    message.classList.remove("is-valid", "is-invalid");
+  });
 };
 
+const sendButton = () => {
+  send.addEventListener("click", event => {
+    event.preventDefault();
+    if (
+      card.value == "" ||
+      CVC.value == "" ||
+      amount.value == "" ||
+      firstName.value == "" ||
+      lastName.value == "" ||
+      city.value == "" ||
+      state.value == "" ||
+      postalCode.value == ""
+    ) {
+      alert.classList.remove("fade");
+    }
+  });
+};
 const invalidInputStyle = input => {
   input.classList.remove("is-valid");
   input.classList.add("is-invalid");
@@ -45,7 +74,8 @@ const checkOnlyString = text => {
 };
 
 const checkOnlyNumber = Number => {
-  return /^[0-9]+$/.test(Number);
+  return /^[0-9.,]+$/.test(Number);
+  //   \[\,\.]?[0-9]
 };
 
 const check16Number = Number => {

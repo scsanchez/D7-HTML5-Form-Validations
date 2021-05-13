@@ -17,6 +17,7 @@
       crossorigin="anonymous"
     />
   </head>
+
   <body>
     <form class="p-5">
       <div class="border">
@@ -24,16 +25,16 @@
           <h1>Payment form example</h1>
         </header>
         <div class="p-4">
-          <div class="alert alert-danger" role="alert">
+          <div class="alert fade alert-danger" id="alert" role="alert">
             Some fields are missing
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-5">
+            <div class="form-group col-md-5 ">
               <label for="card">Card #</label>
               <input
                 type="card"
-                class="form-control"
+                class="form-control "
                 id="card"
                 placeholder="XXXXXXXXXXXXXXXX"
               />
@@ -99,6 +100,7 @@
             <div class="form-group col-md-3">
               <label for="inputState">State</label>
               <input
+                id="state"
                 type="text"
                 class="form-control"
                 name="state"
@@ -219,13 +221,16 @@
         <div class="form border p-3 bg-light text-dark ">
           <div class="col-md-12 text-right">
             <button
+              id="cancel"
               value="Reset"
               type="reset"
               class="btn btn-secondary align-self-end"
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-primary">Send</button>
+            <button type="submit" id="send" class="btn btn-primary">
+              Send
+            </button>
           </div>
         </div>
       </div>
